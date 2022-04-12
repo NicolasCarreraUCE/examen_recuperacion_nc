@@ -2,6 +2,8 @@ package ec.edu.uce.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ec.edu.uce.model.Bodega;
 import ec.edu.uce.model.Producto;
+import ec.edu.uce.model.Registro;
 import ec.edu.uce.service.IBodegaServi;
 import ec.edu.uce.service.IProductoServi;
+import ec.edu.uce.service.IRegistroServi;
 
 @Controller
 public class BodegaController {
@@ -24,6 +28,9 @@ public class BodegaController {
 	
 	@Autowired
 	private IBodegaServi bodegaServi;
+	
+	@Autowired
+	private IRegistroServi registroServi;
 	
 	@GetMapping("/crear/bodega")
 	private String crearBodega(Model model) {
@@ -56,11 +63,47 @@ public class BodegaController {
 		return "redirect:/listar/productos";
 	}
 	
-	private String ingresarInventario(@RequestParam(value = "numero_bodega") String numeroBodega, @RequestParam(value = "codigo_barras_maestro") String codigoBarrasMaestro, @RequestParam(value = "cantidad") String cantidad, Model model) {
-		Bodega bodega = this.bodegaServi.buscarPorNumero(numeroBodega);
-		Producto producto = this.productoServi.buscarPorCodigoBarras(codigoBarrasMaestro);
-		producto.setStock(producto.getStock() + Integer.parseInt(cantidad));
-		this.productoServi.actualizar(producto);
+	@GetMapping("/ingresar/inventario")
+	private String ingresarInventario(Model model) {
+		return "ingresar_inventario";
+	}
+	
+	@PostMapping("/ingresar/inventario/guardar")
+	private String guardarInventario(@RequestParam(value = "numero_bodega") String numeroBodega, @RequestParam(value = "codigo_barras_maestro") String codigoBarrasMaestro, @RequestParam(value = "cantidad") String cantidad, Model model) {
+		CompletableFuture<Bodega> bodega = this.bodegaServi.buscarPorNumero(numeroBodega);
+		CompletableFuture<Producto> producto = this.productoServi.buscarPorCodigoBarras(codigoBarrasMaestro);
+		CompletableFuture.allOf(bodega, producto).join();
+		
+		
+		for(int i = 0; i < Integer.parseInt(cantidad); i++) {
+			Registro registro = new Registro();
+			registro.setCodigoBarrasIndividual(codigoBarrasMaestro + (i + 1));
+			try {
+				registro.setBodega(bodega.get());
+				registro.setProducto(producto.get());
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.registroServi.insertar(registro);
+		}
+		
+		try {
+			producto.get().setStock(Integer.parseInt(cantidad));
+			this.productoServi.actualizar(producto.get());
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return "ingresar_inventario"; 
 	}
@@ -73,9 +116,15 @@ public class BodegaController {
 	
 	@GetMapping("/eliminar/producto/{id}")
 	public String eliminarProducto(@PathVariable("id") Integer id, Model model) {
-		this.productoServi.eliminar(id);
+		Producto producto = this.productoServi.buscar(id);
+		if (producto.getStock() <= 0) {
+			this.productoServi.eliminar(id);
+			model.addAttribute("titulo", "El producto se elimino adecuadamente");
+		} else {
+			model.addAttribute("titulo", "No se puede eliminar este producto");
+		}
+		
 		return "redirect:/listar/productos";
 	}
-	
 	
 }

@@ -1,9 +1,11 @@
 package ec.edu.uce.service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import ec.edu.uce.model.Bodega;
@@ -53,9 +55,10 @@ public class BodegaServiImpl implements IBodegaServi {
 	}
 
 	@Override
-	public Bodega buscarPorNumero(String numero) {
+	@Async
+	public CompletableFuture<Bodega> buscarPorNumero(String numero) {
 		// TODO Auto-generated method stub
-		return this.bodegaRepo.buscarPorNumero(numero);
+		return CompletableFuture.completedFuture(this.bodegaRepo.buscarPorNumero(numero));
 	}
 
 	

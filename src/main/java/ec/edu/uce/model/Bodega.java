@@ -36,8 +36,9 @@ public class Bodega {
 	@ElementCollection
 	private List<String> telefonos;
 
+
 	@OneToMany(mappedBy = "bodega", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Producto> productos;
+	private List<Registro> registros;
 	
 	// SET-GET
 	public Integer getId() {
@@ -80,12 +81,13 @@ public class Bodega {
 		this.telefonos = telefonos;
 	}
 
-	public List<Producto> getProductos() {
-		return productos;
+	public List<Registro> getRegistros() {
+		return registros;
 	}
 
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
+	public void setRegistros(List<Registro> registros) {
+		this.registros = registros;
 	}
+
 	
 }

@@ -1,6 +1,7 @@
 package ec.edu.uce.service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import ec.edu.uce.model.Bodega;
 
@@ -11,5 +12,5 @@ public interface IBodegaServi {
 	void actualizar(Bodega bodega);
 	void eliminar(Integer id);
 	
-	Bodega buscarPorNumero(String numero);
+	CompletableFuture<Bodega> buscarPorNumero(String numero);
 }

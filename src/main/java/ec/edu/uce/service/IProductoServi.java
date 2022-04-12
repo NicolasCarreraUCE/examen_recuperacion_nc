@@ -1,6 +1,7 @@
 package ec.edu.uce.service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import ec.edu.uce.model.Producto;
 
@@ -11,5 +12,5 @@ public interface IProductoServi {
 	void actualizar(Producto producto);
 	void eliminar(Integer id); 
 	
-	Producto buscarPorCodigoBarras(String codigoBarrasMaestro);
+	CompletableFuture<Producto> buscarPorCodigoBarras(String codigoBarrasMaestro);
 }

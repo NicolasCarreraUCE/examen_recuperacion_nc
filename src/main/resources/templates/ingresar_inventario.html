@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>Examen de Recuperación</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +15,30 @@
 <body>
 
     <div class="container">
-        
+        <div class="card bg-light">
+            <div class="card-header bg-dark text-white">Ingresar Inventario</div>
+            <div class="card-body">
+                <form th:action="@{/ingresar/inventario/guardar}" method="post">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="numero_bodega">Numero de bodega</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:name="numero_bodega" name="numero_bodega" id="numero_bodega">
+                        </div>
+                        <label class="col-sm-2 col-form-label" for="">Codigo de barras maestro</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:name="codigo_barras_maestro" name="codigo_barras_maestro" id="codigo_barras_maestro">
+                        </div>
+                        <label class="col-sm-2 col-form-label" for="cantidad">Cantidad</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:name="cantidad" name="cantidad" id="cantidad">
+                        </div>
+                    </div>
+                    <div class="card-footer bg-dark">
+                        <button type="button" class="btn btn-primary">Primary</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

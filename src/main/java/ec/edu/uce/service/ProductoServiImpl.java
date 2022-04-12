@@ -1,9 +1,11 @@
 package ec.edu.uce.service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import ec.edu.uce.model.Producto;
@@ -53,9 +55,10 @@ public class ProductoServiImpl implements IProductoServi {
 	}
 
 	@Override
-	public Producto buscarPorCodigoBarras(String codigoBarrasMaestro) {
+	@Async
+	public CompletableFuture<Producto> buscarPorCodigoBarras(String codigoBarrasMaestro) {
 		// TODO Auto-generated method stub
-		return this.productoRepo.buscarPorCodigoBarras(codigoBarrasMaestro);
+		return CompletableFuture.completedFuture(this.productoRepo.buscarPorCodigoBarras(codigoBarrasMaestro));
 	}
 
 	

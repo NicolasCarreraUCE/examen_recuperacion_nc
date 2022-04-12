@@ -1,12 +1,12 @@
 package ec.edu.uce.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -32,9 +32,8 @@ public class Producto {
 	@Column(name = "prod_stock")
 	private Integer stock;
 	
-	@ManyToOne
-	@JoinColumn(name = "bode_id")
-	private Bodega bodega;
+	@OneToOne(mappedBy = "producto", cascade=CascadeType.ALL)
+	private Registro registro;
 	
 	// SET-GET
 	public Integer getId() {
@@ -77,12 +76,14 @@ public class Producto {
 		this.stock = stock;
 	}
 
-	public Bodega getBodega() {
-		return bodega;
+	public Registro getRegistro() {
+		return registro;
 	}
 
-	public void setBodega(Bodega bodega) {
-		this.bodega = bodega;
+	public void setRegistro(Registro registro) {
+		this.registro = registro;
 	}
+
+	
 	
 }

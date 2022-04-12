@@ -10,4 +10,6 @@ public interface IBodegaRepo {
 	void insertar(Bodega bodega);
 	void actualizar(Bodega bodega);
 	void eliminar(Integer id);
+	
+	Bodega buscarPorNumero(String numero);
 }

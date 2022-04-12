@@ -10,4 +10,6 @@ public interface IProductoRepo {
 	void insertar(Producto producto);
 	void actualizar(Producto producto);
 	void eliminar(Integer id);
+	
+	Producto buscarPorCodigoBarras(String codigoBarrasMaestro); 
 }

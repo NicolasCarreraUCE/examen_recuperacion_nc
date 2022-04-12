@@ -49,4 +49,12 @@ public class BodegaRepoImpl implements IBodegaRepo {
 		this.entityManager.remove(this.buscar(id));
 	}
 
+	@Override
+	public Bodega buscarPorNumero(String numero) {
+		// TODO Auto-generated method stub
+		TypedQuery<Bodega> myQuery = this.entityManager.createQuery("SELECT e FROM Bodega e WHERE e.numero =:numero", Bodega.class);
+		myQuery.setParameter("numero", numero);
+		return myQuery.getSingleResult();
+	}
+
 }

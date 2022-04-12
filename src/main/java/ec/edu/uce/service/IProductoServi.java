@@ -9,5 +9,7 @@ public interface IProductoServi {
 	List<Producto> buscarTodos();
 	void insertar(Producto producto);
 	void actualizar(Producto producto);
-	void eliminar(Integer id);
+	void eliminar(Integer id); 
+	
+	Producto buscarPorCodigoBarras(String codigoBarrasMaestro);
 }

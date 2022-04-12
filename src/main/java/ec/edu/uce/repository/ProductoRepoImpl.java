@@ -49,4 +49,12 @@ public class ProductoRepoImpl implements IProductoRepo {
 		this.entityManager.remove(this.buscar(id));
 	}
 
+	@Override
+	public Producto buscarPorCodigoBarras(String codigoBarrasMaestro) {
+		// TODO Auto-generated method stub
+		TypedQuery<Producto> myQuery = this.entityManager.createQuery("SELECT e FROM Producto e WHERE e.codigoDeBarras =:codigo", Producto.class);
+		myQuery.setParameter("codigo", codigoBarrasMaestro);
+		return myQuery.getSingleResult();
+	}
+
 }

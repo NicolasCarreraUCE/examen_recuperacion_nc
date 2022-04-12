@@ -52,5 +52,11 @@ public class ProductoServiImpl implements IProductoServi {
 		LOG.warn("WARNING: Se a eliminado un objeto Producto de la base de datos");
 	}
 
+	@Override
+	public Producto buscarPorCodigoBarras(String codigoBarrasMaestro) {
+		// TODO Auto-generated method stub
+		return this.productoRepo.buscarPorCodigoBarras(codigoBarrasMaestro);
+	}
+
 	
 }

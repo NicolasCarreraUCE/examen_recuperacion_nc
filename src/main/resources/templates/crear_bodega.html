@@ -18,16 +18,23 @@
         <div class="card bg-light">
             <div class="card-header bg-dark text-white">Crear nueva Bodega</div>
             <div class="card-body">
-                <form th:action="@{/save}" th:object="${bodega}" method="post">
+                <form th:action="@{/crear/bodega/guardar}" th:object="${bodega}" method="post">
                     <div class="form-group row">
-                        <input type="hidden" th:field="*{id}" name="id" id="id">
                         <label class="col-sm-2 col-form-label" for="nombre">Nombre</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" th:field="*{nombre}" id="nombre">
                         </div>
-                        <label class="col-sm-2 col-form-label" for="apellido">Apellido</label>
+                        <label class="col-sm-2 col-form-label" for="numero">Numero</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" th:field="*{apellido}" id="apellido">
+                            <input type="text" class="form-control" th:field="*{numero}" id="numero">
+                        </div>
+                        <label class="col-sm-2 col-form-label" for="direccion">Direccion</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{direccion}" id="direccion">
+                        </div>
+                        <label class="col-sm-2 col-form-label" for="telefonos">Telefonos</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:name="telefonos" name="telefonos" id="telefonos">
                         </div>
                     </div>
                     <div class="card-footer bg-dark">

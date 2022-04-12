@@ -52,5 +52,11 @@ public class BodegaServiImpl implements IBodegaServi {
 		LOG.warn("WARNING: Se a eliminado un objeto Bodega de la base de datos");
 	}
 
+	@Override
+	public Bodega buscarPorNumero(String numero) {
+		// TODO Auto-generated method stub
+		return this.bodegaRepo.buscarPorNumero(numero);
+	}
+
 	
 }

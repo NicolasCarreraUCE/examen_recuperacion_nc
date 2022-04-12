@@ -18,7 +18,7 @@
         <div class="card bg-light">
             <div class="card-header bg-dark text-white">Ingresar Inventario</div>
             <div class="card-body">
-                <form th:action="@{/ingresar/inventario/guardar}" method="post">
+                <form action="#" th:action="@{/ingresar/inventario/guardar}" class= "form-group" method="post">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="numero_bodega">Numero de bodega</label>
                         <div class="col-sm-10">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="card-footer bg-dark">
-                        <button type="button" class="btn btn-primary">Primary</button>
+                        <button type="submit" class="btn btn-primary">Primary</button>
                     </div>
                 </form>
             </div>

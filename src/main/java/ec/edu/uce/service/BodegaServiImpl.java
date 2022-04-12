@@ -3,6 +3,9 @@ package ec.edu.uce.service;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -20,6 +23,7 @@ public class BodegaServiImpl implements IBodegaServi {
 	private IBodegaRepo bodegaRepo;
 	
 	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
 	public Bodega buscar(Integer id) {
 		// TODO Auto-generated method stub
 		LOG.info("INFO: Se a realisado un pedido a la base de datos");
@@ -27,6 +31,7 @@ public class BodegaServiImpl implements IBodegaServi {
 	}
 
 	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
 	public List<Bodega> buscarTodos() {
 		// TODO Auto-generated method stub
 		LOG.info("INFO: Se a realisado un pedido masivo a la base de datos");
@@ -55,6 +60,7 @@ public class BodegaServiImpl implements IBodegaServi {
 	}
 
 	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
 	@Async
 	public CompletableFuture<Bodega> buscarPorNumero(String numero) {
 		// TODO Auto-generated method stub

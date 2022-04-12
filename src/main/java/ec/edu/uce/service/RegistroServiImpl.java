@@ -2,6 +2,9 @@ package ec.edu.uce.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -19,6 +22,7 @@ public class RegistroServiImpl implements IRegistroServi {
 	private IRegistroRepo registroRepo;
 	
 	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
 	public Registro buscar(Integer id) {
 		// TODO Auto-generated method stub
 		LOG.info("INFO: Se a realisado un pedido a la base de datos");
@@ -26,6 +30,7 @@ public class RegistroServiImpl implements IRegistroServi {
 	}
 
 	@Override
+	@Transactional(value = TxType.NOT_SUPPORTED)
 	public List<Registro> buscarTodos() {
 		// TODO Auto-generated method stub
 		LOG.info("INFO: Se a realisado un pedido masivo a la base de datos");

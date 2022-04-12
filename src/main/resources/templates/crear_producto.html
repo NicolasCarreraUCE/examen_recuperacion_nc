@@ -18,7 +18,7 @@
         <div class="card bg-light">
             <div class="card-header bg-dark text-white">Crear nuevo Producto</div>
             <div class="card-body">
-                <form th:action="@{/crear/productos/guardar}" th:object="${producto}" method="post">
+                <form action="#" th:action="@{/crear/productos/guardar}" class= "form-group" th:object="${producto}" method="post">
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="nombre">Nombre</label>
                         <div class="col-sm-10">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="card-footer bg-dark">
-                        <button type="button" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
             </div>
